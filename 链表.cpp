@@ -101,6 +101,72 @@ void freelist(Node*L){
 	L->next=NULL;
 	
 } 
+//找倒数的k个节点 
+int findlistfs(Node*L,int k){
+	Node*fast=L->next;
+	Node*slow=L->next;
+	for(int i=0;i<k;i++){
+		fast=fast->next;
+	} 
+	while(fast!=NULL){
+		fast=L->next;
+		slow=slow->next;
+	}
+	printf("倒数第%d个节点的数是%d",k,slow->data);
+	return 1;
+} 
+//删除链表的中心节点
+void delmidlist(Node*L){
+	Node*fast=L->next;
+	Node*slow=initlist();
+	int count=0; 
+	while(fast!=NULL){
+		fast=fast->next;
+		fast=fast->next;
+		slow=slow->next;
+		count++;
+	}
+	dellist(L,count);
+	printf("删除的中间节点是第%d个节点数字是%d");
+} 
+
+//删除绝对值相同的节点 -----空间换时间 
+void removelist(Node* L,int n){
+	Node*p=L;
+	int a=0;	//做数组的下标 
+	int* q=(int*)malloc(sizeof(int)*(n+1));
+	for(int i=0;i<n+1;i++){//数组初始化为0 
+		*(q+i)=0;
+	}
+	while(p->next!=NULL){
+		//abs获取绝对值 
+		a=abs(p->next->data);
+		if(*(q+a)==0){
+			*(q+a)=1;
+		} 
+		else{//不是0就说明前面已有相同绝对值 
+			Node*tem=p->next;
+			p->next=tem->next;
+			free(tem);
+		}
+	}
+	free(q);
+} 
+//反转单链表
+void turndown(Node*head){
+	Node*first=NULL;
+	Node*second=head->next;
+	Node*third;
+	while(second!=NULL){
+		third=second->next;
+		second->next=first;
+		first=second;
+		second=third;
+	}
+	Node*h=initlist();
+	h->next=first;
+}
+ 
 
 int main(){
 	Node *list=initlist();
@@ -118,3 +184,4 @@ int main(){
 	freelist(list);		//释放内存 
 	return 0;
 }
+
