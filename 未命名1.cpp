@@ -1,9 +1,21 @@
 #include<stdio.h>
-int main()
-#include<string.h>
+main()
 {
-int len=strlen("abc");
-   printf ("%d\n",len);
-   return 0;
-   
+	int  line=0;
+	printf("开始写\n");
+	
+	while (line<8000)
+	{
+		printf("飞舞:%d\n", line);
+		line++;
+	}
+	if(line>=8000)
+	
+	{
+	printf("干得漂亮"); 
+	}
+	else{
+		printf("飞舞"); 
+	}
+	return 0;
 }
